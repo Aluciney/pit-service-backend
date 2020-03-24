@@ -12,15 +12,32 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api', require('./routes'));
+// app.use('/api', require('./routes'));
 
 const server = http.createServer(app);
 const io = socketIO(server);
 
 io.on('connection', socket => {
 
-    socket.on('public_chat', msg => {
-        io.emit('receivedMessage', msg);
+    socket.on('request_mechanical', location_user => {
+        io.emit('mechanical', location_user);
+        // console.log(location_user);
+    });
+
+    socket.on('confirme_request_mechanical', location_user => {
+        io.emit('confirme_mechanical', location_user);
+    });
+    
+    socket.on('confirme_request_user', location_user => {
+        io.emit('confirme_user', location_user);
+    });
+    
+    socket.on('cancel_request_mechanical', location_user => {
+        io.emit('cancel_mechanical', location_user);
+    });
+    
+    socket.on('cancel_request_user', location_user => {
+        io.emit('cancel_user', location_user);
     });
 
     socket.on('disconnect', () => {
