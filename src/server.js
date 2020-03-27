@@ -39,6 +39,10 @@ io.on('connection', socket => {
         io.emit('cancel_user', location_user);
     });
 
+    socket.on('finish_request_mechanical', location_user => {
+        io.emit('finish_mechanical', location_user);
+    });
+
     socket.on('disconnect', () => {
 
     });
