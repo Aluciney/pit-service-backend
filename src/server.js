@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-// app.use('/api', require('./routes'));
+app.use('/api', require('./routes'));
 
 const server = http.createServer(app);
 const io = socketIO(server);
@@ -21,7 +21,6 @@ io.on('connection', socket => {
 
     socket.on('request_mechanical', location_user => {
         io.emit('mechanical', location_user);
-        // console.log(location_user);
     });
 
     socket.on('confirme_request_mechanical', location_user => {

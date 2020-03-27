@@ -20,6 +20,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      type_user: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       avatar_url: {
         allowNull: true,
         type: Sequelize.STRING

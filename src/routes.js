@@ -5,13 +5,13 @@ const UserController = require('./controllers/UserController');
 const AuthenticationController = require('./controllers/AuthenticationController');
 
 // USER
-routes.get('/users', UserController.index);
-routes.get('/users/:id', UserController.show);
 routes.post('/users', UserController.store);
 
 routes.use('/users', [ authMiddleware ]); // MIDDLEWARE
-routes.put('/users', UserController.update);
-routes.delete('/users', UserController.destroy);
+routes.get('/users', UserController.index);
+routes.get('/users/:id', UserController.show);
+routes.put('/users/:id', UserController.update);
+routes.delete('/users/:id', UserController.destroy);
 
 // authentication
 routes.post('/authentication/login', AuthenticationController.login);

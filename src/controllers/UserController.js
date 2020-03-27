@@ -19,13 +19,14 @@ module.exports = {
 
     async store(req, res) {
         try {
-            const { name, email, password, avatar_url } = req.body;
+            const { name, email, password, type_user, avatar_url } = req.body;
             var password_hash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
             const _user = await user.create({
                 name,
                 email, 
                 password_hash, 
+                type_user, 
                 avatar_url
             });
 

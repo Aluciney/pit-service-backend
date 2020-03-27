@@ -26,19 +26,23 @@ module.exports = {
     },
 
     async login_google(req, res) {
-        const { email } = req.body;
-        const user_ = await user.findOne({ 
-            where: { email },
-        });
-        
-        if(!user_){
-            return res.status(401).json({ error: 'E-mail não cadastrado' });
+        try {
+            const { email } = req.body;
+            const user_ = await user.findOne({ 
+                where: { email },
+            });
+            
+            if(!user_){
+                return res.status(200).json({ error: 'E-mail não cadastrado' });
+            }
+
+            var token = jwt.sign({ 
+                id: user_.id 
+            }, process.env.JWT_SECRET_KEY);
+
+            return res.status(200).json({ user: user_, token });
+        } catch (error) {
+            return res.status(404).json({ error: `Erro ao fazer login. Erro: ${error}` });
         }
-
-        var token = jwt.sign({ 
-            id: user_.id 
-        }, process.env.JWT_SECRET_KEY);
-
-        return res.status(200).json({ user: user_, token });
     },
 };
