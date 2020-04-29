@@ -1,4 +1,4 @@
-const { user } = require('../app/models');
+const { user, vehicle } = require('../app/models');
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 
@@ -22,6 +22,13 @@ module.exports = {
             id: user_.id 
         }, process.env.JWT_SECRET_KEY);
 
+        if(user_.type_user === 'user'){
+            const vehicles = await vehicle.findAll({ 
+                where: { id_user: user_.id },
+            });
+            return res.status(200).json({ user: user_, token, vehicles });
+        }
+
         return res.status(200).json({ user: user_, token });
     },
 
@@ -39,6 +46,13 @@ module.exports = {
             var token = jwt.sign({ 
                 id: user_.id 
             }, process.env.JWT_SECRET_KEY);
+
+            if(user_.type_user === 'user'){
+                const vehicles = await vehicle.findAll({ 
+                    where: { id_user: user_.id },
+                });
+                return res.status(200).json({ user: user_, token, vehicles });
+            }
 
             return res.status(200).json({ user: user_, token });
         } catch (error) {
