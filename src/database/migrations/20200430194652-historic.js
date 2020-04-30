@@ -2,7 +2,7 @@
 
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('vehicle', {
+        return queryInterface.createTable('historic', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -10,6 +10,13 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             id_user: {
+                allowNull: false,
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'user'
+                }
+            },
+            id_user_mechanical: {
                 allowNull: false,
                 type: Sequelize.INTEGER,
                 references: {
@@ -30,12 +37,19 @@ module.exports = {
             },
             board: {
                 allowNull: false,
-                unique : true,
                 type: Sequelize.STRING
             },
             year: {
                 allowNull: false,
                 type: Sequelize.STRING
+            },
+            value: {
+                allowNull: false,
+                type: Sequelize.DECIMAL(6,2)
+            },
+            destination: {
+                allowNull: false,
+                type: Sequelize.JSON
             },
             createdAt: {
                 allowNull: false,
@@ -48,6 +62,6 @@ module.exports = {
         });
     },
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('vehicle');
+        return queryInterface.dropTable('historic');
     }
 };

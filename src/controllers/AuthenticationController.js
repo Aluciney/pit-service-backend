@@ -1,4 +1,4 @@
-const { user, vehicle } = require('../app/models');
+const { user, vehicle, historic } = require('../app/models');
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 
@@ -22,14 +22,25 @@ module.exports = {
             id: user_.id 
         }, process.env.JWT_SECRET_KEY);
 
+        var historics = null;
+
         if(user_.type_user === 'user'){
             const vehicles = await vehicle.findAll({ 
                 where: { id_user: user_.id },
             });
-            return res.status(200).json({ user: user_, token, vehicles });
+            historics = await historic.findAll({ 
+                where: { id_user: user_.id },
+            });
+            return res.status(200).json({ user: user_, token, historics, vehicles });
+        }else{
+            historics = await historic.findAll({ 
+                where: { id_user_mechanical: user_.id },
+            });
         }
 
-        return res.status(200).json({ user: user_, token });
+        console.log(vehicles);
+
+        return res.status(200).json({ user: user_, token, historics });
     },
 
     async login_google(req, res) {
@@ -47,14 +58,23 @@ module.exports = {
                 id: user_.id 
             }, process.env.JWT_SECRET_KEY);
 
+            var historics = null;
+
             if(user_.type_user === 'user'){
                 const vehicles = await vehicle.findAll({ 
                     where: { id_user: user_.id },
                 });
-                return res.status(200).json({ user: user_, token, vehicles });
+                historics = await historic.findAll({ 
+                    where: { id_user: user_.id },
+                });
+                return res.status(200).json({ user: user_, token, historics, vehicles });
+            }else{
+                historics = await historic.findAll({ 
+                    where: { id_user_mechanical: user_.id },
+                });
             }
 
-            return res.status(200).json({ user: user_, token });
+            return res.status(200).json({ user: user_, token, historics });
         } catch (error) {
             return res.status(404).json({ error: `Erro ao fazer login. Erro: ${error}` });
         }
