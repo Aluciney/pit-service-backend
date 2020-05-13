@@ -38,8 +38,6 @@ module.exports = {
             });
         }
 
-        console.log(vehicles);
-
         return res.status(200).json({ user: user_, token, historics });
     },
 
