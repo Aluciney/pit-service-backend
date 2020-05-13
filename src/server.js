@@ -30,6 +30,10 @@ io.on('connection', socket => {
     socket.on('confirme_request_user', location_user => {
         io.emit('confirme_user', location_user);
     });
+
+    socket.on('location_mechanical', socket_request => {
+        io.emit('location_mechanical', socket_request);
+    });
     
     socket.on('cancel_request_mechanical', location_user => {
         io.emit('cancel_mechanical', location_user);
