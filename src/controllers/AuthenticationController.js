@@ -89,6 +89,6 @@ module.exports = {
             return res.status(401).json({ error: 'E-mail já cadastrado' });
         }
 
-        return res.status(200);
+        return res.send();
     },
 };
