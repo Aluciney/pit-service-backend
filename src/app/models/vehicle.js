@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
         brand: DataTypes.STRING,
         model: DataTypes.STRING,
         board: DataTypes.STRING,
+        chassi: DataTypes.STRING,
+        color: DataTypes.STRING,
+        municipio: DataTypes.STRING,
+        uf: DataTypes.STRING(2),
         year: DataTypes.STRING,
     }, {});
     vehicle.associate = function (models) {

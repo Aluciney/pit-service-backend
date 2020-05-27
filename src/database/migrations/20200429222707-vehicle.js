@@ -33,6 +33,22 @@ module.exports = {
                 unique : true,
                 type: Sequelize.STRING
             },
+            chassi: {
+                allowNull: false,
+                type: Sequelize.STRING
+            },
+            color: {
+                allowNull: false,
+                type: Sequelize.STRING
+            },
+            municipio: {
+                allowNull: false,
+                type: Sequelize.STRING
+            },
+            uf: {
+                allowNull: false,
+                type: Sequelize.STRING(2)
+            },
             year: {
                 allowNull: false,
                 type: Sequelize.STRING
