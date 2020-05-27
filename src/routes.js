@@ -36,5 +36,6 @@ routes.delete('/historics/:id', HistoricController.destroy);
 // authentication
 routes.post('/authentication/login', AuthenticationController.login);
 routes.post('/authentication/login/google', AuthenticationController.login_google);
+routes.get('/authentication/verify', AuthenticationController.verify);
 
 module.exports = routes;

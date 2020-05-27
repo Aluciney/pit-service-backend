@@ -77,4 +77,18 @@ module.exports = {
             return res.status(404).json({ error: `Erro ao fazer login. Erro: ${error}` });
         }
     },
+
+    async verify(req, res) {
+
+        const { email } = req.query;
+        const user_ = await user.findOne({ 
+            where: { email },
+        });
+        
+        if(user_){
+            return res.status(401).json({ error: 'E-mail já cadastrado' });
+        }
+
+        return res.status(200);
+    },
 };
