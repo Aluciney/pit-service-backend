@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     const historic = sequelize.define('historic', {
         id_user: DataTypes.INTEGER,
         id_user_mechanical: DataTypes.INTEGER,
+        service_type: DataTypes.STRING,
         type: DataTypes.STRING,
         brand: DataTypes.STRING,
         model: DataTypes.STRING,

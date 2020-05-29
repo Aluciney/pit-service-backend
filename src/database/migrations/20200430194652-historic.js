@@ -23,6 +23,10 @@ module.exports = {
                     model: 'user'
                 }
             },
+            service_type: {
+                allowNull: false,
+                type: Sequelize.STRING
+            },
             type: {
                 allowNull: false,
                 type: Sequelize.STRING
